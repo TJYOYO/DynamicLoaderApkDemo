@@ -1,13 +1,10 @@
 
 导读：学习了任玉刚的动态加载框架技术，进行插件化的开发，实现host项目+plugin项目的独立开发，和动态加载，这里通过demo详细梳理一下流程
 
-#### DynamicLoaderApkDemo 项目
-github地址: https://github.com/George-Soros/DynamicLoaderApkDemo
-
 #### 一：介绍代码结构
 DynamicLoaderApkdemo中包括了HostApp,PluginApp ，先介绍一下他们：
 
-####1：HostApp
+#### 1：HostApp
 com.ryg.dynamicload包中的文件是动态插件框架提供的,其中包括了DL相关的代理类。
 ![image.png](https://upload-images.jianshu.io/upload_images/909565-166c39f3730b816d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 com.ryg.sample包中的MainActivity是一个启动页面如下：
@@ -15,9 +12,9 @@ com.ryg.sample包中的MainActivity是一个启动页面如下：
 ![image.png](https://upload-images.jianshu.io/upload_images/909565-d8452a09a21ace48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-####2：PluginApp
+#### 2：PluginApp
 
-######插件需要加入动态加载库
+###### 插件需要加入动态加载库
 其中libs中加入动态加载库dl-apk.jar包，它只参与编译，不打包到apk中，这个包就是host中的com.ryg.dynamic下面的代码打包而来!
 ```
 dependencies {
@@ -30,14 +27,14 @@ dependencies {
 ![image.png](https://upload-images.jianshu.io/upload_images/909565-0baa40a17e1a6d3e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-######页面继承动态库页面
+###### 页面继承动态库页面
 com.practise.pluginapp.MainActivity，启动页面，**需要继承了动态加载库提供的DLBasePluginFragmentActivity类（当然可以是DLBasePluginActivity，或者对于service等）**，方便实现host加载时代理该类Activity的责任和生命周期。
 
 
 
 
-####二：动态加载分析流程
-######1：加载插件PluginApp.apk到内存中的过程
+#### 二：动态加载分析流程
+###### 1：加载插件PluginApp.apk到内存中的过程
 HostApp->MainActivity->loadPlugin, 加载手机sd卡中的PluginApp.apk, 其中PluginApp.apk是PluginApp项目打包而来
 ```
 private void loadPlugin() {
@@ -125,7 +122,7 @@ private DexClassLoader createDexClassLoader(String dexPath) {
 ```
 **android提供的类加载器DexClassLoader，传入了apk的路径，指定class.dex的路径，本地方法库，父类加载器等，完成了apk中class.dex文件的加载到内存，到这里插件Apk的动态加载就完成了！**
 
-####2：启动插件页面，实现插件的功能
+#### 2：启动插件页面，实现插件的功能
 
 ```
 tv_start_plugin.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +225,7 @@ private Class<? extends Activity> getProxyActivityClass(Class<?> clazz) {
 ![image.png](https://upload-images.jianshu.io/upload_images/909565-eaf0a27ded988a64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 需要看动态加载插件开发的参考：
+
 [https://github.com/singwhatiwanna/dynamic-load-apk](https://github.com/singwhatiwanna/dynamic-load-apk)  开源代码dlapk-lib
 
 [http://blog.csdn.net/singwhatiwanna/article/details/39937639](http://blog.csdn.net/singwhatiwanna/article/details/39937639)  任玉刚的分析
