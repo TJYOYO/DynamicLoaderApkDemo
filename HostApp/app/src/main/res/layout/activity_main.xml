@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="com.ryg.sample.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_load_plugin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="加载插件"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        />
+
+    <TextView
+        android:id="@+id/tv_start_plugin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="启动插件"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="100dp"
+        />
+
+
+</LinearLayout>
